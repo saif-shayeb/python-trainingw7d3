@@ -1,6 +1,6 @@
 # Flask Student Portal v1
 
-A modular Flask application for managing student registrations.
+A Flask application for managing student registrations.
 
 ## Features
 - Homepage and navigation
