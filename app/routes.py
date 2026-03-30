@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+import re
 
 main = Blueprint('main', __name__)
 
@@ -14,12 +15,24 @@ def index():
 def register():
     global next_id
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        course = request.form.get('course')
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        course = request.form.get('course', '').strip()
         
         if not name or not email:
             flash('Name and Email are required!')
+            return redirect(url_for('main.register'))
+            
+        if len(name) < 2:
+            flash('Name must be at least 2 characters long!')
+            return redirect(url_for('main.register'))
+            
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            flash('Invalid email address!')
+            return redirect(url_for('main.register'))
+            
+        if any(s['email'] == email for s in students.values()):
+            flash('Email already registered!')
             return redirect(url_for('main.register'))
             
         student_id = next_id
