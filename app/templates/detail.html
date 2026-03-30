@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Student Details</h2>
+    <p><strong>ID:</strong> {{ student.id }}</p>
+    <p><strong>Name:</strong> {{ student.name }}</p>
+    <p><strong>Email:</strong> {{ student.email }}</p>
+    <p><strong>Course:</strong> {{ student.course }}</p>
+    <a href="{{ url_for('main.student_list') }}" class="btn">Back to List</a>
+{% endblock %}
